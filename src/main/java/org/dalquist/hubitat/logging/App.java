@@ -92,8 +92,9 @@ public class App {
         File file = logDir.resolve(String.format("%s.log", logFile)).toFile();
         String pattern = logDir.resolve(String.format("%s-%%d{%s}.log", logFile, options.rotationPattern)).toString();
         logger.atInfo().log("Creating log file %s with rotation pattern %s", file, pattern);
-        return RotationConfig.builder().file(file).filePattern(pattern).policy(DailyRotationPolicy.getInstance())
-                .policy(new SizeBasedRotationPolicy(1024 * 1024 * options.rotationSize)).build();
+        return RotationConfig.builder().file(file).filePattern(pattern).clock(LocalSystemClock.getInstance())
+                .policy(DailyRotationPolicy.getInstance())
+                .policy(new SizeBasedRotationPolicy(1024L * 1024 * options.rotationSize)).build();
     }
 
     static void formatLogMessage(MainLogMessage msg, LogFormatter.Logger logger) {

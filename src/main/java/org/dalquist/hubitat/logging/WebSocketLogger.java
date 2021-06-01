@@ -165,9 +165,9 @@ public final class WebSocketLogger<T> {
         }
 
         if (isConnected()) {
-            logger.atInfo().atMostEvery(1, TimeUnit.MINUTES).log("%s is connected", serverTarget);
+            logger.atInfo().atMostEvery(179, TimeUnit.SECONDS).log("%s is connected", serverTarget);
         } else {
-            logger.atInfo().atMostEvery(1, TimeUnit.MINUTES).log("%s is disconnected", serverTarget);
+            logger.atInfo().atMostEvery(37, TimeUnit.SECONDS).log("%s is disconnected", serverTarget);
             reconnect(wsSesson);
         }
         return closedLatch.await(timeout, unit);
